@@ -1,2 +1,12 @@
 @import "bootstrap.css";
 @import "responsive.css";
+
+.hero-unit {
+	background-color: transparent;
+}
+
+
+.row-fluid img {
+	padding: 2px;
+	border: 1px dotted black;
+}
