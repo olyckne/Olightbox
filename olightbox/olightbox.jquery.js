@@ -7,17 +7,18 @@
 	 */
 	var Olightbox = function(element, options) {
 		var that = this;
+		this.options = $.extend({}, $.fn.olightbox.defaults, options);
+
 		this.trigger = $(element);
 		this.fetchUrl = this.trigger.attr("data-target") || this.trigger.attr("href");
 		this.overlay = $("<div />");
 		this.lightbox = $("<div />").addClass(this.options.elements.wrapper.className);
 		this.contentWrapper = $("<div />").addClass(this.options.elements.contentWrapper.className);
-		this.content = $("<img />");
+		this.content = null;
 		this.dimension = {
 						width: window.innerWidth || $(window).width(),
 						height: window.innerHeight || $(window).height()
 						};
-		this.options = $.extend({}, $.fn.olightbox.defaults, options);
 
 	};
 
@@ -52,36 +53,54 @@
 
 		buildContent : function() {
 			var that = this,
+				url = this.fetchUrl,
 				type = this.getContentType(this.fetchUrl);
+
+			this.content = $("<div />");
 
 			switch(type) {
 				case "img":
-					this.content.attr("src", this.fetchUrl)
-						.load( function() {
-							$(this).fadeIn();
-							that.lightbox.css({
-								left: (that.dimension.width-that.lightbox.width())/2,
-								top: (that.dimension.height-that.lightbox.height())/2
-							});
-						});
+					this.content = $("<img />").attr("src", this.fetchUrl);
 					break;
 				case "inline":
-				
+					url = " "+this.fetchUrl;
 					break;
 				default:
 					break;
 
 			}
+			console.log(url);
+			this.content.load(url, function(data, status, xhr) {
+				if(status === "error") {
+					data = that.options.errorMessage;
+					that.lightbox.css({
+						width: '20%',
+						height: '20%'
+					});
+					that.content.html(data);
+					that.lightbox.addClass(that.options.elements.error.className);			
+				}
+				console.log(xhr);
+				var left = (that.dimension.width-that.lightbox.width())/2,
+					top = (that.dimension.height-that.lightbox.height())/2;
+				left = (left < 0) ? 0 : left;
+				top = (top < 0) ? 0 : top;
 
+				$(this).fadeIn(that.options.transitionSpeed);
+				that.lightbox.css({
+					left: left,
+					top: top
+				});
+			});
 		},
 
 		show : function() {
 			var that = this;
 			
 			this.prepare();
-			this.overlay.show();
-			this.lightbox.show();			
-			
+			this.overlay.fadeIn(this.options.transitionSpeed);
+			this.lightbox.fadeIn(this.options.transitionSpeed);
+			$("body").css("overflow", "hidden");
 			this.bindToClose();
 		},
 
@@ -99,8 +118,17 @@
 		},
 
 		remove	: function() {
+			var that = this;
 			$("."+this.options.elements.overlay.className).remove();
-			this.lightbox.remove();
+			this.lightbox
+				.fadeOut(this.options.transitionSpeed, function() {
+					$(this).empty().remove();
+					that.content.empty();
+				});
+
+			
+
+			$("body").css("overflow", "");
 		},
 		
 		getContentType : function(str) {
@@ -138,9 +166,11 @@
 	};
 
 	$.fn.olightbox.defaults = {
-		"transition"	: "fadeIn",
-		"trigger"		: "click",
-		"show"			: true,
+		'transition'	: 'fadeIn',
+		'transitionSpeed': 500,
+		'trigger'		: 'click',
+		'show'			: true,
+		'errorMessage'	: "Error!<br>Content not found.",
 		'elements'		: {
 			'overlay'	: {
 				'className' : "olightbox-overlay"
@@ -153,6 +183,9 @@
 			},
 			'loader' : {
 				'className'	:	'olightbox-loader'
+			},
+			'error' : {
+				'className' :	'olightbox-error'
 			}
 		}
 	};

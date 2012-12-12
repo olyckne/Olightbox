@@ -7,6 +7,7 @@
   z-index: 1000;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .olightbox-wrapper {
   position: fixed;
@@ -14,12 +15,25 @@
   left: 0;
   z-index: 1001;
   background-color: white;
+  height: 100%;
+  max-width: 80%;
+  overflow: scroll;
+  box-shadow: 0 5px 40px 0 rgba(0,0,0,0.5);
 }
 .olightbox-wrapper .olightbox-content-wrapper {
   padding: 10px;
   max-width: 100%;
   height: auto;
 }
+
+.olightbox-error {
+  background-color: #CD3333;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1em;
+}
+
 .olightbox-loader {
   width: 28px;
   height: 28px;
