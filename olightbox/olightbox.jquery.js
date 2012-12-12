@@ -69,9 +69,8 @@
 					break;
 
 			}
-			console.log(url);
 			this.content.load(url, function(data, status, xhr) {
-				if(status === "error") {
+				if(type !== "img" && status === "error") {
 					data = that.options.errorMessage;
 					that.lightbox.css({
 						width: '20%',
@@ -123,7 +122,8 @@
 			this.lightbox
 				.fadeOut(this.options.transitionSpeed, function() {
 					$(this).empty().remove();
-					that.content.empty();
+					that.contentWrapper.empty();
+//					that.content.empty();
 				});
 
 			
