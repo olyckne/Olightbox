@@ -10,8 +10,8 @@
 		this.trigger = $(element);
 		this.fetchUrl = this.trigger.attr("data-target") || this.trigger.attr("href");
 		this.overlay = $("<div />");
-		this.lightbox = $("<div />").addClass("olightbox-wrapper");
-		this.contentWrapper = $("<div />").addClass("olightbox-content-wrapper");
+		this.lightbox = $("<div />").addClass(this.options.elements.wrapper.className);
+		this.contentWrapper = $("<div />").addClass(this.options.elements.contentWrapper.className);
 		this.content = $("<img />");
 		this.dimension = {
 						width: window.innerWidth || $(window).width(),
@@ -117,6 +117,9 @@
 		'elements'		: {
 			'overlay'	: {
 				'className' : "olightbox-overlay"
+			},
+			'wrapper'	: {
+				'className' : "olightbox-wrapper"
 			},
 			'contentWrapper' : {
 				'className'	: 'olightbox-content-wrapper'
