@@ -16,14 +16,47 @@
             <div class="hero-unit">
                 <h1>OLIGHTBOX</h1>
                 <p class="lead">A super simple lightbox</p>
-                <a class="btn btn-primary">Learn More</a>
+                <a href="#more" class="btn btn-primary">Learn More</a>
                 <a class="btn btn-primary" href="olightbox.jquery.zip">Just Download</a>
                 <hr>
                 <div class="row-fluid">
+                    <h3>Examples</h3>
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <h4>images</h4>
+                            <a href="http://farm5.staticflickr.com/4043/4585904862_36d690722c_b.jpg" 
+                                data-toggle="olightbox">
+                                <img src="http://farm5.staticflickr.com/4043/4585904862_36d690722c_t.jpg" alt="">
+                            </a>
+                            <a href="http://farm5.staticflickr.com/4069/4585278559_7772a3321a_b.jpg"
+                                data-toggle="olightbox">
+                                <img src="http://farm5.staticflickr.com/4069/4585278559_7772a3321a_t.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="span3">
+                            <h4>error:</h4>
+                            <a href="http://flickholdr.com/1500/1000"
+                                data-toggle="olightbox">
+                                <img src="http://flickholdr.com/100/100" alt="">
+                            </a>
+                        </div>
+                        <div class="span3">
+                            <h4>Other</h4>
+                            <a href="#" class="btn"
+                                data-toggle="olightbox"
+                                data-target="#more">
+                                Press me to view the "Learn more"
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid" id="more">
                     <div class="span6">
                         <h3>Usage</h3>
                         <p>
-                            Set <code>data-toggle="olightbox"</code> on the trigger element and set <code>data-target="url"</code> or just wrap it with an a-tag.
+                            Set <code>data-toggle="olightbox"</code> and <code>data-target="url"</code> on the trigger element. It uses a.href as a fallback if data-target isn't presence. <br>
+                            Nice way to have one link for when JS is turned off, and another when it's turned on.
 <pre>
 <code class="prettyprint">&lt;img src="example_small.jpg"
     data-toggle="olightbox" data-target="example_big.jpg">
@@ -86,6 +119,8 @@ Of course you can always do it the javascript way
                         </tbody>
                     </table>
                     </div>
+            </div> <!-- row -->
+            <div class="row-fluid">
                 <div class="span6">
                     <h3>Methods</h3>
                     <h4>.olightbox(options)</h4>
