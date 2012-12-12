@@ -7,8 +7,8 @@
 	 */
 	var Olightbox = function(element, options) {
 		var that = this;
-		this.$element = $(element);
-		this.fetchUrl = this.$element.attr("href");
+		this.trigger = $(element);
+		this.fetchUrl = this.trigger.attr("data-target") || this.trigger.attr("href");
 		this.overlay = $("<div />");
 		this.lightbox = $("<div />").addClass("olightbox-wrapper");
 		this.contentWrapper = $("<div />").addClass("olightbox-content-wrapper");
@@ -28,7 +28,7 @@
 			var that = this;
 
 			this.showLoader();
-			
+
 			if(this.isImage(this.fetchUrl)) {
 				this.content.attr("src", this.fetchUrl)
 					.load( function() {
@@ -83,8 +83,6 @@
 		},
 
 		remove	: function() {
-			console.log("remove");
-			console.log(this);
 			$("."+this.options.elements.overlay.className).remove();
 			this.lightbox.remove();
 		},
@@ -135,12 +133,7 @@
 	 */
 
 	$(document).on($.fn.olightbox.defaults.trigger+'.olightbox', '[data-toggle="olightbox"]', function(event) {
-		var $this = $(this),
-			target = $this.attr("data-target") || $this.attr("href"),
-			option = {target: target};
-
-
-		$this.olightbox(option);
+		$(this).olightbox();
 
 		event.preventDefault();
 	});
