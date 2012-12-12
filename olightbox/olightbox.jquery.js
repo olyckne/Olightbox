@@ -29,16 +29,7 @@
 
 			this.showLoader();
 
-			if(this.isImage(this.fetchUrl)) {
-				this.content.attr("src", this.fetchUrl)
-					.load( function() {
-						$(this).fadeIn();
-						that.lightbox.css({
-							left: (that.dimension.width-that.lightbox.width())/2,
-							top: (that.dimension.height-that.lightbox.height())/2
-						});
-					});
-			}
+			this.buildContent();
 			this.content.appendTo(this.contentWrapper);
 
 			this.contentWrapper.appendTo(this.lightbox);
@@ -57,6 +48,31 @@
 					.addClass(this.options.elements.loader.className)
 					.appendTo(this.overlay);
 			}
+		},
+
+		buildContent : function() {
+			var that = this,
+				type = this.getContentType(this.fetchUrl);
+
+			switch(type) {
+				case "img":
+					this.content.attr("src", this.fetchUrl)
+						.load( function() {
+							$(this).fadeIn();
+							that.lightbox.css({
+								left: (that.dimension.width-that.lightbox.width())/2,
+								top: (that.dimension.height-that.lightbox.height())/2
+							});
+						});
+					break;
+				case "inline":
+				
+					break;
+				default:
+					break;
+
+			}
+
 		},
 
 		show : function() {
@@ -87,6 +103,17 @@
 			this.lightbox.remove();
 		},
 		
+		getContentType : function(str) {
+			var type = "html";
+
+			if(this.isImage(str))
+				type = "img";
+			else if(str.charAt(0) === "#")
+				type = "inline";
+
+			return type;
+		},
+
 		isImage: function (str) {
 			return typeof str === "string" && str.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp)((\?|#).*)?$)/i);
 		}
