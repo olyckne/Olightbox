@@ -91,11 +91,12 @@
 				left = (left < 0) ? 0 : left;
 				top = (top < 0) ? 0 : top;
 
-				$(this).fadeIn(that.options.transitionSpeed);
 				that.lightbox.css({
 					left: left,
 					top: top
 				});
+				$(this).fadeIn(that.options.transitionSpeed);
+
 			});
 		},
 
@@ -105,7 +106,6 @@
 			this.prepare();
 			this.overlay.fadeIn(this.options.transitionSpeed);
 			this.lightbox.fadeIn(this.options.transitionSpeed);
-			$("body").css("overflow", "hidden");
 			this.bindToClose();
 		},
 
@@ -116,7 +116,7 @@
 				that.remove.apply(that);
 			});
 
-			$(document).on("keydown", function() {
+			$(document).on("keydown", function(event) {
 				var key = event.key || event.which;
 				if(key === 27) that.remove();
 			});
