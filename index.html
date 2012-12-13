@@ -51,94 +51,95 @@
                     </div>
                 </div>
 
-                <div class="row-fluid" id="more">
+                <section  id="more">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <h3>Usage</h3>
+                            <p>
+                                Set <code>data-toggle="olightbox"</code> and <code>data-target="url"</code> on the trigger element. It uses a.href as a fallback if data-target isn't presence. <br>
+                                Nice way to have one link for when JS is turned off, and another when it's turned on.
+    <pre>
+    <code class="prettyprint">&lt;img src="example_small.jpg"
+        data-toggle="olightbox" data-target="example_big.jpg">
+    &lt;!-- or -->
+    &lt;a href="example_big.jpg" data-toggle="olightbox">
+        &lt;img src="example_small.jpg">
+    &lt;/a>
+    </code>
+    </pre>
+    Of course you can always do it the javascript way
+    <pre>
+    <code class="prettyprint">$(".olightbox").olightbox(options);
+    </code>
+    </pre>
+                       </p>                        
+                        </div>
+                        <div class="span6">
+                            <h3>Customize</h3>
+                            <p>
+                                Do it like you always do it.
+                            </p>
+    <pre>
+    <code class="prettyprint">$(".olightbox").olightbox({
+    'settings_key' : 'settings_value'
+    });
+    </code>
+    </pre>
+                            <p>
+                               Well, this is how the settings looks like.
+                               If you change the className-attributes you're gonna break the style though.
+                            </p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Value</th>
+                                    <th>Description</th>
+                                    <th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>transition</td>
+                                    <td>string</td>
+                                    <td>transition type:<br> fadeIn, slide, show etc</td>
+                                    <td>fadeIn</td>
+                                </tr>
+                                <tr>
+                                    <td>trigger</td>
+                                    <td>string</td>
+                                    <td>event type:<br>  hover, click etc</td>
+                                    <td>click</td>
+                                </tr>
+                                <tr>
+                                    <td>show</td>
+                                    <td>boolean</td>
+                                    <td>show box directly on trigger</td>
+                                    <td>true</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                </div> <!-- row -->
+                <div class="row-fluid">
                     <div class="span6">
-                        <h3>Usage</h3>
-                        <p>
-                            Set <code>data-toggle="olightbox"</code> and <code>data-target="url"</code> on the trigger element. It uses a.href as a fallback if data-target isn't presence. <br>
-                            Nice way to have one link for when JS is turned off, and another when it's turned on.
-<pre>
-<code class="prettyprint">&lt;img src="example_small.jpg"
-    data-toggle="olightbox" data-target="example_big.jpg">
-&lt;!-- or -->
-&lt;a href="example_big.jpg" data-toggle="olightbox">
-    &lt;img src="example_small.jpg">
-&lt;/a>
-</code>
-</pre>
-Of course you can always do it the javascript way
-<pre>
-<code class="prettyprint">$(".olightbox").olightbox(options);
-</code>
-</pre>
-                   </p>                        
-                    </div>
-                    <div class="span6">
-                        <h3>Customize</h3>
-                        <p>
-                            Do it like you always do it.
-                        </p>
-<pre>
-<code class="prettyprint">$(".olightbox").olightbox({
-'settings_key' : 'settings_value'
-});
-</code>
-</pre>
-                        <p>
-                           Well, this is how the settings looks like.
-                           If you change the className-attributes you're gonna break the style though.
-                        </p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Key</th>
-                                <th>Value</th>
-                                <th>Description</th>
-                                <th>Default</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>transition</td>
-                                <td>string</td>
-                                <td>transition type:<br> fadeIn, slide, show etc</td>
-                                <td>fadeIn</td>
-                            </tr>
-                            <tr>
-                                <td>trigger</td>
-                                <td>string</td>
-                                <td>event type:<br>  hover, click etc</td>
-                                <td>click</td>
-                            </tr>
-                            <tr>
-                                <td>show</td>
-                                <td>boolean</td>
-                                <td>show box directly on trigger</td>
-                                <td>true</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
-            </div> <!-- row -->
-            <div class="row-fluid">
-                <div class="span6">
-                    <h3>Methods</h3>
-                    <h4>.olightbox(options)</h4>
-                    <p>Activate olightbox with optional options object</p>
-                    <pre><code class="prettyprint">$(".olightbox").olightbox({show: false});</code></pre>
+                        <h3>Methods</h3>
+                        <h4>.olightbox(options)</h4>
+                        <p>Activate olightbox with optional options object</p>
+                        <pre><code class="prettyprint">$(".olightbox").olightbox({show: false});</code></pre>
 
-                    <h4>.olightbox('prepare')</h4>
-                    <p>Prepare all the needed elements</p>
-                    <pre><code class="prettyprint">$(".olightbox").olightbox("prepare");</code></pre>
-                    <h4>.olightbox('show')</h4>
-                    <p>Show the lightbox</p>
-                    <pre><code class="prettyprint">$(".olightbox").olightbox('show');</code></pre>
-                    <h4>.olightbox('remove')</h4>
-                    <p>Remove the lightbox</p>
-                    <pre><code class="prettyprint">$(".olightbox").olightbox('remove');</code></pre>
-                </div>
-            </div> <!-- row-fluid -->
-
+                        <h4>.olightbox('prepare')</h4>
+                        <p>Prepare all the needed elements</p>
+                        <pre><code class="prettyprint">$(".olightbox").olightbox("prepare");</code></pre>
+                        <h4>.olightbox('show')</h4>
+                        <p>Show the lightbox</p>
+                        <pre><code class="prettyprint">$(".olightbox").olightbox('show');</code></pre>
+                        <h4>.olightbox('remove')</h4>
+                        <p>Remove the lightbox</p>
+                        <pre><code class="prettyprint">$(".olightbox").olightbox('remove');</code></pre>
+                    </div>
+                </div> <!-- row-fluid -->
+            </section>
             </div> <!-- hero-unit -->
         </div> <!-- container -->
 
