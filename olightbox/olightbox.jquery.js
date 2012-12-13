@@ -61,6 +61,12 @@
 			switch(type) {
 				case "img":
 					this.content = $("<img />").attr("src", this.fetchUrl);
+					this.lightbox.css("overflow", "hidden");
+					that.content.css({
+						// "max-width" : that.dimension.width-40,
+						"max-height": that.dimension.height-40
+					});
+
 					break;
 				case "inline":
 					url = " "+this.fetchUrl;
