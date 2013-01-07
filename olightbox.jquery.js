@@ -26,23 +26,24 @@
 		Constructor	: Olightbox,
 
 		prepare : function() {
-			var that = this;
+			var that = this,
+				deferred = $.Deferred();
 
 			this.showLoader();
+			$.when(this.buildContent()).then( function() {
+				that.bindToClose();
+				deferred.resolve();
+			});
 
-			this.buildContent();
-			this.content.appendTo(this.contentWrapper);
-
-			this.contentWrapper.appendTo(this.lightbox);
-			this.lightbox.hide().appendTo("body");
-
+			return deferred.promise();
 		},
 
 		showLoader : function() {
 			this.overlay
 				.addClass(this.options.elements.overlay.className)
 				.hide()
-				.appendTo("body");
+				.appendTo("body")
+				.fadeIn();
 
 			if(this.overlay.children("."+this.options.elements.loader.className).length === 0) {
 				$("<div />")
@@ -54,17 +55,21 @@
 		buildContent : function() {
 			var that = this,
 				url = this.fetchUrl,
-				type = this.getContentType(this.fetchUrl);
+				type = this.getContentType(this.fetchUrl),
+				deferred = $.Deferred();
 
 			this.content = $("<div />");
+
 
 			switch(type) {
 				case "img":
 					this.content = $("<img />").attr("src", this.fetchUrl);
+					url = null;
 					this.lightbox.css("overflow", "hidden");
 					that.content.css({
 						// "max-width" : that.dimension.width-40,
-						"max-height": that.dimension.height-40
+						"max-height": that.dimension.height-40,
+						"height"	: that.dimension.height-40
 					});
 
 					break;
@@ -85,7 +90,12 @@
 					that.content.html(data);
 					that.lightbox.addClass(that.options.elements.error.className);			
 				}
-				console.log(xhr);
+
+				that.lightbox.hide().appendTo("body");
+				that.content.appendTo(that.contentWrapper);
+				that.contentWrapper.appendTo(that.lightbox);
+
+
 				var left = (that.dimension.width-that.lightbox.width())/2,
 					top = (that.dimension.height-that.lightbox.height())/2;
 				left = (left < 0) ? 0 : left;
@@ -95,18 +105,19 @@
 					left: left,
 					top: top
 				});
-				$(this).fadeIn(that.options.transitionSpeed);
 
+
+				deferred.resolve();
 			});
+
+			return deferred.promise();
 		},
 
 		show : function() {
 			var that = this;
-			
-			this.prepare();
-			this.overlay.fadeIn(this.options.transitionSpeed);
-			this.lightbox.fadeIn(this.options.transitionSpeed);
-			this.bindToClose();
+			$.when(this.prepare()).then( function() {
+				that.lightbox.fadeIn(that.options.transitionSpeed);
+			});
 		},
 
 
