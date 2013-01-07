@@ -11,7 +11,7 @@
         <link rel="author" href="humans.txt">
     </head>
     <body onload="prettyPrint()">
-
+<a href="https://github.com/olyckne/Olightbox"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
         <div class="container">
             <div class="hero-unit">
                 <h1>
@@ -63,20 +63,15 @@
                             <p>
                                 Set <code>data-toggle="olightbox"</code> and <code>data-target="url"</code> on the trigger element. It uses a.href as a fallback if data-target isn't presence. <br>
                                 Nice way to have one link for when JS is turned off, and another when it's turned on.
-    <pre>
-    <code class="prettyprint">&lt;img src="example_small.jpg"
-        data-toggle="olightbox" data-target="example_big.jpg">
-    &lt;!-- or -->
-    &lt;a href="example_big.jpg" data-toggle="olightbox">
-        &lt;img src="example_small.jpg">
-    &lt;/a>
-    </code>
-    </pre>
-    Of course you can always do it the javascript way
-    <pre>
-    <code class="prettyprint">$(".olightbox").olightbox(options);
-    </code>
-    </pre>
+    <pre><code class="prettyprint">&lt;img src="example_small.jpg" 
+    data-toggle="olightbox" data-target="example_big.jpg">
+&lt;!-- or -->
+&lt;a href="example_big.jpg" data-toggle="olightbox">
+    &lt;img src="example_small.jpg">
+&lt;/a></code></pre>
+
+    Of course you can always do it manually the javascript way
+    <pre><code class="prettyprint">$(".olightbox").olightbox(options);</code></pre>
                        </p>                        
                         </div>
                         <div class="span6">
@@ -84,16 +79,9 @@
                             <p>
                                 Do it like you always do it.
                             </p>
-    <pre>
-    <code class="prettyprint">$(".olightbox").olightbox({
+    <pre><code class="prettyprint">$(".olightbox").olightbox({
     'settings_key' : 'settings_value'
-    });
-    </code>
-    </pre>
-                            <p>
-                               Well, this is how the settings looks like.
-                               If you change the className-attributes you're gonna break the style though.
-                            </p>
+});</code></pre>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -111,6 +99,12 @@
                                     <td>fadeIn</td>
                                 </tr>
                                 <tr>
+                                    <td>transitionSpeed</td>
+                                    <td>int</td>
+                                    <td>Speed for the transition</td>
+                                    <td>500</td>
+                                </tr>
+                                <tr>
                                     <td>trigger</td>
                                     <td>string</td>
                                     <td>event type:<br>  hover, click etc</td>
@@ -121,6 +115,12 @@
                                     <td>boolean</td>
                                     <td>show box directly on trigger</td>
                                     <td>true</td>
+                                </tr>
+                                <tr>
+                                    <td>errorMessage</td>
+                                    <td>string</td>
+                                    <td>Default error message</td>
+                                    <td>"Error!<br>Content not found."</td>
                                 </tr>
                             </tbody>
                         </table>
