@@ -68,8 +68,7 @@
 					this.lightbox.css("overflow", "hidden");
 					that.content.css({
 						// "max-width" : that.dimension.width-40,
-						"max-height": that.dimension.height-40,
-						"height"	: that.dimension.height-40
+						"max-height": that.dimension.height-40
 					});
 
 					break;
