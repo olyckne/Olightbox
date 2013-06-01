@@ -1,0 +1,11 @@
+{
+  "name": "Olightbox",
+  "version": "1.0.0",
+  "main": [
+  		"olightbox.jquery.css",
+  		"olightbox.jquery.js"
+  ],
+  "dependencies": {
+  	"jquery": "~2.0.1"
+  }
+}
