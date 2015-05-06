@@ -104,7 +104,7 @@
 					left: left,
 					top: top
 				});
-
+				$(that.content).children().show();
 
 				deferred.resolve();
 			});
